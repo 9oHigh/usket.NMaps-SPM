@@ -6,18 +6,22 @@ import PackageDescription
 let package = Package(
     name: "usket.NMaps-SPM",
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "usket.NMaps-SPM",
             targets: ["usket.NMaps-SPM"]),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
+        .binaryTarget(
+            name: "NMapsMap",
+            path: "./Frameworks/NMapsMap.xcframework"
+        ),
+        .binaryTarget(
+            name: "NMapsGeometry",
+            path: "./Frameworks/NMapsGeometry.xcframework"
+        ),
         .target(
-            name: "usket.NMaps-SPM"),
-        .testTarget(
-            name: "usket.NMaps-SPMTests",
-            dependencies: ["usket.NMaps-SPM"]),
+            name: "usket.NMaps-SPM",
+            dependencies: ["NMapsMap", "NMapsGeometry"]
+        )
     ]
 )
